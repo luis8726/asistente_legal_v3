@@ -13,7 +13,7 @@ VS_ID = os.getenv("OPENAI_VECTOR_STORE_ID", "")
 MODEL = os.getenv("OPENAI_MODEL", "gpt-5.1")
 
 st.set_page_config(page_title="KA Legal (Vector Store OpenAI)", layout="wide")
-st.title("⚖️ KA Legal (Societario) — Streamlit + OpenAI Vector Store")
+st.title("⚖️ Chalk Legal powered by TCA")
 
 # Validaciones
 if not API_KEY:
@@ -73,18 +73,6 @@ if user_text:
         answer_text = resp.output_text or "(sin respuesta)"
         placeholder.markdown(answer_text)
 
-        # (Opcional) Mostrar “citas” / resultados de búsqueda si vinieran
-        # Nota: la estructura exacta puede variar según versión, esto lo dejo robusto.
-        with st.expander("📌 Evidencia / resultados del vector store (debug)", expanded=False):
-            try:
-                # Busca items tipo file_search en la salida
-                # y muestra lo más útil que haya.
-                for item in resp.output:
-                    # item suele ser dict-like / object-like
-                    data = item.model_dump() if hasattr(item, "model_dump") else dict(item)
-                    if data.get("type") == "file_search_call":
-                        st.json(data)
-            except Exception as e:
-                st.write("No se pudieron mostrar detalles:", str(e))
+        
 
     st.session_state.messages.append({"role": "assistant", "content": answer_text})
