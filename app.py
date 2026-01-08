@@ -13,7 +13,7 @@ VS_ID = os.getenv("OPENAI_VECTOR_STORE_ID", "")
 MODEL = os.getenv("OPENAI_MODEL", "gpt-5.1")
 
 st.set_page_config(page_title="KA Legal (Vector Store OpenAI)", layout="wide")
-st.title("⚖️ Chalk Legal powered by TCA")
+st.title("⚖️ Chalk Legal")
 
 # Validaciones
 if not API_KEY:
@@ -76,3 +76,4 @@ if user_text:
         
 
     st.session_state.messages.append({"role": "assistant", "content": answer_text})
+
